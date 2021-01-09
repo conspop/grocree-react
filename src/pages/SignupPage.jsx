@@ -16,7 +16,6 @@ class SignupPage extends Component {
 
   handleSubmit = async () => {
       try {
-        console.log(this.state)
         await userService.signup(this.state)
         this.props.handleSignupOrLogin();
         this.props.history.push('/schedule')

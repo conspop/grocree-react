@@ -1,3 +1,12 @@
+const functions = {
+  setToken,
+  getToken,
+  removeToken,
+  getUserFromToken
+};
+
+export default functions
+
 function setToken(token) {
   localStorage.setItem('token', token);
 }
@@ -24,10 +33,3 @@ function getUserFromToken () {
 function removeToken() {
   localStorage.removeItem('token');
 }
-
-export default {
-  setToken,
-  getToken,
-  removeToken,
-  getUserFromToken
-};

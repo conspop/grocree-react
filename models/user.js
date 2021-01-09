@@ -6,7 +6,8 @@ const SALT_ROUNDS = 6;
 const Schema = mongoose.Schema;
 
 const ingredientsSchema = new Schema({
-  staple: Boolean,
+  ingredientName: String,
+  amount: String,
   house: String,
   store: String,
 })

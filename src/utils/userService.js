@@ -2,6 +2,15 @@ import tokenService from './tokenService'
 
 const BASE_URL = '/api/users/';
 
+const functions = {
+  signup,
+  getUser,
+  logout,
+  login
+}
+
+export default functions
+
 function signup(user) {
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
@@ -15,7 +24,6 @@ function signup(user) {
   .then(({token}) => {
     tokenService.setToken(token);
   })
-  .catch(err => console.log(err.message))
 }
 
 function getUser() {
@@ -38,11 +46,4 @@ function login(creds) {
     throw new Error('Incorrect username or password.');
   })
   .then(({token}) => tokenService.setToken(token));
-}
-
-export default {
-  signup,
-  getUser,
-  logout,
-  login
 }
