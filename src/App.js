@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { Switch, Route } from 'react-router-dom'
 
-function App() {
+import userService from './utils/userService'
+
+import LoginPage from './pages/LoginPage'
+import SignupPage from './pages/SignupPage'
+import IngredientsPage from './pages/IngredientsPage'
+
+export default function App() {
+
+  const [user, setUser] = useState(userService.getUser())
+
+  const handleLogout = () => {
+    userService.logout();
+    setUser(null)
+  }
+
+  const handleSignupOrLogin = () => {
+    setUser(userService.getUser());
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Switch>
+        <Route exact path='/signup' render={({history}) =>
+          <SignupPage
+            handleSignupOrLogin={handleSignupOrLogin} 
+            history={history}
+          />
+        } />
+        <Route exact path='/login' render={({history}) =>
+          <LoginPage
+            handleSignupOrLogin={handleSignupOrLogin} 
+            history={history}
+          />
+        } />
+        <Route exact path='/ingredients'>
+          <IngredientsPage 
+            user={user}
+          />
+        </Route>
+      </Switch>
+    </>
+  )
 }
-
-export default App;

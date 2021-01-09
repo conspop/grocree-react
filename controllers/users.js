@@ -8,6 +8,7 @@ module.exports = {
 };
 
 async function signup(req, res) {
+  console.log('got here')
   const user = new User(req.body);
   try {
     await user.save();
