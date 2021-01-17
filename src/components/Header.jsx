@@ -10,7 +10,7 @@ export default function Header({user, handleLogout}) {
         <div><Auth user={user} handleLogout={handleLogout} /></div>
       </div>
       <div className='flex-h space-evenly'>
-        <Link to='/ingredients'>Ingredients</Link>
+        <Link to='/staples'>Staples</Link>
         <Link to='/recipes'>Recipes</Link>
         <Link to='/lists'>Lists</Link>
       </div>

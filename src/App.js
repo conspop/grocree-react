@@ -6,7 +6,7 @@ import userService from './utils/userService'
 import Header from './components/Header'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
-import IngredientsPage from './pages/IngredientsPage'
+import StaplesPage from './pages/StaplesPage'
 import RecipesPage from './pages/RecipesPage'
 import ListsPage from './pages/ListsPage'
 
@@ -44,20 +44,14 @@ export default function App() {
             history={history}
           />
         } />
-        <Route exact path='/ingredients'>
-          <IngredientsPage 
-            user={user}
-          />
+        <Route exact path='/staples'>
+          <StaplesPage />
         </Route>
         <Route exact path='/recipes'>
-          <RecipesPage
-            user={user}
-          />
+          <RecipesPage />
         </Route>
         <Route exact path='/lists'>
-          <ListsPage 
-            user={user}
-          />
+          <ListsPage />
         </Route>
       </div>
     </Switch>

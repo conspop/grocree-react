@@ -1,4 +1,5 @@
 import tokenService from './tokenService'
+import axios from 'axios'
 
 const BASE_URL = '/api/users/';
 
@@ -6,7 +7,8 @@ const functions = {
   signup,
   getUser,
   logout,
-  login
+  login, 
+  getData
 }
 
 export default functions
@@ -46,4 +48,17 @@ function login(creds) {
     throw new Error('Incorrect username or password.');
   })
   .then(({token}) => tokenService.setToken(token));
+}
+
+async function getData() {
+  return await axios.get('/api/data', {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + tokenService.getToken()
+    }
+  })
+  .then(res => {
+    return res.data
+  })
+  .catch(err => console.log(err.message))
 }

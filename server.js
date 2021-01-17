@@ -11,7 +11,6 @@ const app = express()
 require('./config/database');
 
 var usersRouter = require('./routes/api/users');
-var ingredientsRouter = require('./routes/api/ingredients')
 
 app.use(logger('dev'))
 app.use(express.json())
@@ -23,7 +22,7 @@ app.use('/api/users', usersRouter);
 
 //protected routes
 app.use(require('./config/auth'));
-app.use('/api/ingredients', ingredientsRouter);
+app.use('/api/staples', require('./routes/api/staples'))
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
