@@ -4,4 +4,6 @@ const staplesCtrl = require('../../controllers/staples');
 
 router.get('/', staplesCtrl.index);
 
+router.post('/', staplesCtrl.create)
+
 module.exports = router;
