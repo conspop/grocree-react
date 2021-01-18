@@ -22,7 +22,7 @@ export default function StaplesPage() {
     getStaples()
   },[])
 
-  const addStaple = async (item, minimum) => {
+  const addStaple = (item, minimum) => {
     // update state
     const oldStaples = [...staples]
     const newStaples = [...staples, {item, minimum}]
@@ -35,8 +35,24 @@ export default function StaplesPage() {
       minimum
     })
     .then(response => response.data)
-    
-    // return state if it fails
+    .catch(error => {
+      console.log(error)
+      setStaples(oldStaples)
+    })
+  }
+
+  const deleteStaple = async (index) => {
+    const oldStaples = [...staples]
+    const newStaples = [...staples]
+    newStaples.splice(index, 1)
+    setStaples(newStaples)
+    axios.delete('/api/staples', {
+      data: {
+        token: tokenService.getToken(),
+        index
+      }
+    })
+    .then(response => response.data)
     .catch(error => {
       console.log(error)
       setStaples(oldStaples)
@@ -45,7 +61,7 @@ export default function StaplesPage() {
 
   return (
     <>
-      <StaplesTable staples={staples}/>
+      <StaplesTable staples={staples} deleteStaple={deleteStaple}/>
       <AddStaple addStaple={addStaple} />
     </>
   )
