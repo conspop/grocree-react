@@ -9,6 +9,7 @@ import SignupPage from './pages/SignupPage'
 import StaplesPage from './pages/StaplesPage'
 import RecipesPage from './pages/RecipesPage'
 import ListsPage from './pages/ListsPage'
+import RecipePage from './pages/RecipePage'
 
 import './App.css'
 
@@ -49,6 +50,9 @@ export default function App() {
         </Route>
         <Route exact path='/recipes'>
           <RecipesPage />
+        </Route>
+        <Route path='/recipes/:recipeName'>
+          <RecipePage />
         </Route>
         <Route exact path='/lists'>
           <ListsPage />
