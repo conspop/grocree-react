@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 export default function Header({user, handleLogout}) {
 
@@ -10,12 +10,27 @@ export default function Header({user, handleLogout}) {
         <div><Auth user={user} handleLogout={handleLogout} /></div>
       </div>
       <div className='header-nav'>
-        <Link to='/staples'>Staples</Link>
-        <Link to='/recipes'>Recipes</Link>
-        <Link to='/lists'>Lists</Link>
+        <NavLink path='/staples' pathName='Staples' />
+        <NavLink path='/recipes' pathName='Recipes' />
+        <NavLink path='/lists' pathName='Lists' />
       </div>
     </div>
   )
+}
+
+function NavLink({path, pathName}) {
+  const location = useLocation()
+  const currentPath = location.pathname
+
+  return (
+    <Link 
+      to={path}
+      className={path === currentPath ? 'activeLink' : false}
+    >
+      {pathName}
+    </Link>
+  )
+
 }
 
 function Auth({user, handleLogout}) {

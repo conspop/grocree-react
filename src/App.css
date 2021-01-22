@@ -5,25 +5,28 @@ html {
 .header-container {
   display: flex;
   flex-direction: column;
+  border-bottom: 1px solid black;
 }
 
 .header-main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: .5rem;
 }
 
 .header-nav {
   display: flex;
   justify-content: space-evenly;
+  padding: .5rem;
 }
 
-button:active {
-  outline: none;
+.header-nav a {
+  text-decoration: none;
+  color: black;
 }
 
-button:focus {
-  -moz-outline-style: none;
+.activeLink {
+  font-weight: bold;
 }
-
 
