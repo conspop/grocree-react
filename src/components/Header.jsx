@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom'
 export default function Header({user, handleLogout}) {
 
   return (
-    <>
-      <div className='flex-h space-between'>
+    <div className='header-container'>
+      <div className='header-main'>
         <div>GROCREE</div>
         <div><Auth user={user} handleLogout={handleLogout} /></div>
       </div>
-      <div className='flex-h space-evenly'>
+      <div className='header-nav'>
         <Link to='/staples'>Staples</Link>
         <Link to='/recipes'>Recipes</Link>
         <Link to='/lists'>Lists</Link>
       </div>
-    </>
+    </div>
   )
 }
 

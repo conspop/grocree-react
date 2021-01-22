@@ -1,22 +1,17 @@
-body {
-  margin: auto;
-  width: 80%;
-}
-
-.flex-v {
+.header-container {
   display: flex;
   flex-direction: column;
 }
 
-.flex-h {
+.header-main {
   display: flex;
   flex-direction: row;
-}
-
-.space-between {
   justify-content: space-between;
 }
 
-.space-evenly {
+.header-nav {
+  display: flex;
   justify-content: space-evenly;
 }
+
+

@@ -14,7 +14,14 @@ async function index(req, res) {
 async function create(req, res) {
   const {item, minimum} = req.body
   const user = await User.findById(req.user._id)
-  user.staples.push({item, minimum})
+  const {items, staples} = user
+  // add item to staples
+  staples.push({item, minimum})
+  // if new item, add to items as well
+  const isInItems = items.filter(itemsItem => itemsItem.name === item).length > 0
+  if (!isInItems) {
+    items.push({name: item})
+  }
   await user.save()
   res.json('ok')
 }

@@ -1,5 +1,26 @@
-.staples-table {
-  width: 50%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.staples-container {
+  padding: 5%;
 }
+
+.staples-table {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr .5fr;
+}
+
+.staples-add-button {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+}
+
+.staples-add-form {
+  position: fixed;
+  bottom: 5%;
+}
+
+.staples-message {
+  position: fixed;
+  bottom: 10%;
+}
+

@@ -27,37 +27,39 @@ export default function App() {
   }
 
   return (
-    <Switch>
-      <div>
-        <Header 
-          user={user} 
-          handleLogout={handleLogout}
-        />
-        <Route exact path='/signup' render={({history}) =>
-          <SignupPage
-            handleSignupOrLogin={handleSignupOrLogin} 
-            history={history}
+    <div className='app-container'>
+      <Switch>
+        <>
+          <Header 
+            user={user} 
+            handleLogout={handleLogout}
           />
-        } />
-        <Route exact path='/login' render={({history}) =>
-          <LoginPage
-            handleSignupOrLogin={handleSignupOrLogin} 
-            history={history}
-          />
-        } />
-        <Route exact path='/staples'>
-          <StaplesPage />
-        </Route>
-        <Route exact path='/recipes'>
-          <RecipesPage />
-        </Route>
-        <Route path='/recipes/:recipeName'>
-          <RecipePage />
-        </Route>
-        <Route exact path='/lists'>
-          <ListsPage />
-        </Route>
-      </div>
-    </Switch>
+          <Route exact path='/signup' render={({history}) =>
+            <SignupPage
+              handleSignupOrLogin={handleSignupOrLogin} 
+              history={history}
+            />
+          } />
+          <Route exact path='/login' render={({history}) =>
+            <LoginPage
+              handleSignupOrLogin={handleSignupOrLogin} 
+              history={history}
+            />
+          } />
+          <Route exact path='/staples'>
+            <StaplesPage />
+          </Route>
+          <Route exact path='/recipes'>
+            <RecipesPage />
+          </Route>
+          <Route path='/recipes/:recipeName'>
+            <RecipePage />
+          </Route>
+          <Route exact path='/lists'>
+            <ListsPage />
+          </Route>
+        </>
+      </Switch>
+    </div>
   )
 }
