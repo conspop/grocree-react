@@ -5,22 +5,77 @@
 .staples-table {
   width: 100%;
   display: grid;
-  grid-template-columns: 1.5fr 1fr .5fr;
+  grid-template-columns: 1.5fr 1fr auto;
+}
+
+.staples-table-title {
+  border-bottom: 2px solid black;
+  padding-bottom: .5rem;
+  font-weight: bold;
+}
+
+.staples-table-item {
+  padding: .5rem 0;
+  border-bottom: 1px solid grey;
 }
 
 .staples-add-button {
   position: fixed;
-  bottom: 5%;
-  right: 5%;
+  bottom: 2.5%;
+  right: 2.5%;
 }
 
 .staples-add-form {
+  height: 10%;
+  width: 90%;
   position: fixed;
-  bottom: 5%;
+  bottom: 2.5%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: .5rem;
+}
+
+.staples-add-form input {
+  font-size: 16px;
+  padding: 0.25rem;
+  border: 1px solid grey;
+  border-radius:.25rem;
+}
+
+.staples-add-button {
+  grid-area: 1/2/3/3;
+  background-color: transparent;
+  border: none;
+  color: green;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+}
+
+.staples-add-form button {
+  grid-area: 1/2/3/3;
+  background-color: transparent;
+  border: none;
+  color: green;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+  align-self: end;
+  justify-self: flex-end;
 }
 
 .staples-message {
   position: fixed;
-  bottom: 10%;
+  bottom: 17.5%;
+  width: 90%;
+  border: 1px solid grey;
+  border-radius:.25rem;
+  background-color: lightgray;
+  text-align: center;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  color: red;
+  padding: 0 1rem;
 }
 

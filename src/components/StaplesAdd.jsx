@@ -40,8 +40,8 @@ export default function StaplesAdd({addStaple}) {
 
 function AddButton({handleClickAddButton}) {
   return (
-    <div className='staples-add-button'>
-      <button onClick={handleClickAddButton}>Add</button>
+    <div>
+      <button className='staples-add-button' onClick={handleClickAddButton}><i class="fas fa-plus-circle"></i></button>
     </div>
   )
 }
@@ -54,27 +54,35 @@ function AddForm({addStaple, handleClickOutsideAddForm}) {
   const handleMinimumChange = event => setMinimum(event.target.value)
 
   const handleSubmit = () => {
-    addStaple(item, minimum)
-    setItem('')
-    setMinimum('')
+    if (item) {
+      addStaple(item, minimum)
+      setItem('')
+      setMinimum('')
+      document.querySelector('#item-input').focus()
+    }
   }
 
   return (
     <div className='staples-add-form'>
       <input
+        id='item-input'
         placeholder="Item"
         onChange={handleItemChange}
         value={item}
+        autoFocus
+        required
       />
       <input 
-        placeholder="Minimum"
+        placeholder="Minimum (optional)"
         onChange={handleMinimumChange}
         value={minimum}
       />
       <button
         onClick={handleSubmit}
+        className='add-button'
+        disabled={(item === '')}
       >
-        Add
+        <i class="fas fa-check-circle"></i>
       </button>
     </div>
   )

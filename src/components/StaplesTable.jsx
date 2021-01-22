@@ -4,9 +4,9 @@ export default function StaplesTable({staples, deleteStaple}) {
   return (
     <>
       <div className='staples-table'>
-        <div>Item</div>
-        <div>Minimum</div>
-        <div></div>
+        <div className='staples-table-title'>Item</div>
+        <div className='staples-table-title'>Minimum</div>
+        <div className='staples-table-title'></div>
         {staples.map(({item, minimum}, index) => {
           return (
             <Staple 
@@ -29,9 +29,11 @@ function Staple({index, item, minimum, deleteStaple}) {
   
   return (
     <>
-      <div>{item}</div>
-      <div>{minimum}</div>
-      <button onClick={handleDelete}>Delete</button>
+      <div className='staples-table-item'>{item}</div>
+      <div className='staples-table-item'>{minimum}</div>
+      <div className='staples-table-item'>
+        <button className='delete-button' onClick={handleDelete}><i class="fas fa-minus-circle"></i></button>
+      </div>
     </>
   )
 }
