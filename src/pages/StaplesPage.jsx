@@ -9,7 +9,7 @@ import Message from '../components/Message'
 
 export default function StaplesPage() {
 
-  const [staples, setStaples] = useState([{item:'', minimum:''}])
+  const [staples, setStaples] = useState('')
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -33,14 +33,14 @@ export default function StaplesPage() {
 
     // update state
     const oldStaples = [...staples]
-    const newStaples = [...staples, {item, minimum}]
+    const newStaples = [...staples, {item: {name: item}, minimum}]
     setStaples(newStaples)
 
     // post to db
     axios.post('/api/staples', {
       token: tokenService.getToken(),
-      item,
-      minimum
+      newStapleItem: item,
+      newStapleMinimum: minimum
     })
     .then(() => {console.log('Added item')})
     .catch(error => {
@@ -70,13 +70,54 @@ export default function StaplesPage() {
     })
   }
 
+  const updateStapleName = (index, newName) => {
+    const oldStaples = [...staples]
+    const newStaples = [...staples]
+    newStaples[index].item = {name: newName}
+    setStaples(newStaples)
+
+    axios.put('api/staples', {
+      token: tokenService.getToken(),
+      index,
+      newName
+    })
+    .then(() => {console.log('Changed name!')})
+    .catch(error => {
+      console.log(error.message)
+      setStaples(oldStaples)
+    })
+  }
+
+  const updateStapleMinimum = (index, newMinimum) => {
+    const oldStaples = [...staples]
+    const newStaples = [...staples]
+    newStaples[index].minimum = newMinimum
+    setStaples(newStaples)
+
+    axios.put('api/staples', {
+      token: tokenService.getToken(),
+      index,
+      newMinimum
+    })
+    .then(() => {console.log('Changed name!')})
+    .catch(error => {
+      console.log(error.message)
+      setStaples(oldStaples)
+    })
+  }
+
   const closeMessage = () => {
     setMessage('')
   }
 
   return (
     <div className='staples-container'>
-      <StaplesTable staples={staples} deleteStaple={deleteStaple}/>
+      <StaplesTable 
+        staples={staples} 
+        deleteStaple={deleteStaple} 
+        updateStapleName={updateStapleName} 
+        updateStapleMinimum={updateStapleMinimum}
+      />
       {message ? <Message message={message} closeMessage={closeMessage} /> : false}
       <StaplesAdd addStaple={addStaple} />
     </div>

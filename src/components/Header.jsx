@@ -25,7 +25,7 @@ function NavLink({path, pathName}) {
   return (
     <Link 
       to={path}
-      className={path === currentPath ? 'activeLink' : false}
+      className={path === currentPath ? 'activeLink' : undefined}
     >
       {pathName}
     </Link>

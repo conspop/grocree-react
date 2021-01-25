@@ -41,7 +41,7 @@ export default function StaplesAdd({addStaple}) {
 function AddButton({handleClickAddButton}) {
   return (
     <div>
-      <button className='staples-add-button' onClick={handleClickAddButton}><i class="fas fa-plus-circle"></i></button>
+      <button className='staples-add-button' onClick={handleClickAddButton}><i className="fas fa-plus-circle"></i></button>
     </div>
   )
 }
@@ -49,6 +49,23 @@ function AddButton({handleClickAddButton}) {
 function AddForm({addStaple, handleClickOutsideAddForm}) {
   const [item, setItem] = useState('')
   const [minimum, setMinimum] =useState('')
+
+  useEffect(() => {
+    document.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        addStaple(item, minimum)
+        setItem('')
+        setMinimum('')
+      }
+    })
+    return () => document.removeEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        addStaple(item, minimum)
+        setItem('')
+        setMinimum('')
+      }
+    })
+  },[])
 
   const handleItemChange = event => setItem(event.target.value)
   const handleMinimumChange = event => setMinimum(event.target.value)
@@ -82,7 +99,7 @@ function AddForm({addStaple, handleClickOutsideAddForm}) {
         className='add-button'
         disabled={(item === '')}
       >
-        <i class="fas fa-check-circle"></i>
+        <i className="fas fa-check-circle"></i>
       </button>
     </div>
   )

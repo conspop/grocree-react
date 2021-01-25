@@ -5,18 +5,15 @@ const SALT_ROUNDS = 6;
 
 const Schema = mongoose.Schema;
 
-const itemsSchema = new Schema({
-  name: String,
-  home: String,
-  store: String
-})
-
-const staplesSchema = new Schema({
-  item: String,
+const stapleSchema = new Schema({
+  item: {
+    type: Schema.Types.ObjectId,
+    ref: 'Item'
+  },
   minimum: String
 })
 
-const recipesSchema = new Schema({
+const recipeSchema = new Schema({
   name: String,
   items: [{
     item: String,
@@ -24,10 +21,13 @@ const recipesSchema = new Schema({
   }]
 })
 
-const listsSchema = new Schema({
+const listSchema = new Schema({
   name: String,
   items: [{
-    item: String,
+    item: {
+      type: Schema.Types.ObjectId,
+      ref: 'Item'
+    },
     sources: [{
       source: String,
       amount: String
@@ -39,10 +39,9 @@ const listsSchema = new Schema({
 const userSchema = new Schema({
   username: {type: String, required:true, unique: true, dropDups: true},
   password: String,
-  items: [itemsSchema],
-  staples: [staplesSchema],
-  recipes: [recipesSchema],
-  lists: [listsSchema]
+  staples: [stapleSchema],
+  recipes: [recipeSchema],
+  lists: [listSchema]
 });
 
 userSchema.pre('save', function(next) {
