@@ -1,5 +1,116 @@
-.recipe-table {
-  width: 50%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+.recipe-container {
+  padding: 5%;
 }
+
+.recipe-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-table-title {
+  display: grid;
+  grid-template-columns: 50% 30% 1fr;
+  border-bottom: 2px solid black;
+  padding-bottom: .5rem;
+  font-weight: bold;
+}
+
+.recipe-table-item {
+  display: grid;
+  grid-template-columns: 50% 30% 1fr;
+  padding: .5rem 0;
+  border-bottom: 1px solid grey;
+}
+
+.change-name-message {
+  grid-column: 1/4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 75%;
+  margin: 5% auto 2.5% auto;
+  background-color: lightgray;
+  border-radius:.25rem;
+}
+
+.change-name-message p {
+  text-align: center;
+  grid-column: 1/3;
+  margin: 0;
+  padding: 1rem 1rem .5rem 1rem;
+}
+
+.change-name-message button {
+  background-color: transparent;
+  border: none;
+  padding: .5rem 0 .75rem 0;
+}
+
+.recipe-table input {
+  border: none;
+  padding: 0;
+}
+
+.recipe-add-button {
+  position: fixed;
+  bottom: 2.5%;
+  right: 2.5%;
+}
+
+.recipe-add-form {
+  height: 10%;
+  width: 90%;
+  position: fixed;
+  bottom: 2.5%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  row-gap: .5rem;
+}
+
+.recipe-add-form input {
+  font-size: 16px;
+  padding: 0.25rem;
+  border: 1px solid grey;
+  border-radius:.25rem;
+}
+
+.recipe-add-button {
+  grid-area: 1/2/3/3;
+  background-color: transparent;
+  border: none;
+  color: green;
+  padding: 0 1rem;
+  font-size: 1.5rem;
+}
+
+.recipe-add-form button {
+  grid-area: 1/2/3/3;
+  background-color: transparent;
+  border: none;
+  color: green;
+  padding-left: 1rem;
+  font-size: 1.5rem;
+  align-self: end;
+  justify-self: flex-end;
+}
+
+.recipe-message {
+  position: fixed;
+  bottom: 15%;
+  width: 90%;
+  border: 1px solid grey;
+  border-radius:.25rem;
+  background-color: lightgray;
+  text-align: center;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  color: red;
+  padding: 0 1rem;
+  justify-self: end;
+}
+
+
+

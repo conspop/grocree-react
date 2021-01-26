@@ -1,70 +1,85 @@
-// import React, { useState, useEffect} from 'react'
-// import { useParams } from 'react-router-dom'
+import React, { useState, useEffect} from 'react'
+import { useParams } from 'react-router-dom'
+import RecipeTable from '../components/RecipeTable'
+import RecipeAdd from '../components/RecipeAdd'
+import axios from 'axios'
+import tokenService from '../utils/tokenService'
+import './RecipePage.css'
 
-// import axios from 'axios'
-// import tokenService from '../utils/tokenService'
-// import './RecipePage.css'
+export default function RecipePage() { 
 
-// // import RecipeTable from '../components/RecipeTable'
+  const recipeNameFromUrl = useParams()
+  console.log(recipeNameFromUrl.recipeName)
 
-// export default function RecipePage() { 
-//   const {recipeName} = useParams()
+  const [recipeName, setRecipeName] = useState('')
+  const [recipeItems, setRecipeItems] = useState('')
 
-//   const [recipe, setRecipe] = useState({name:'', items:[{item:'', amount:''}]})
+  useEffect(() => {
+    const getRecipe = async () => {
+      await axios.get(`/api/recipes/${recipeNameFromUrl.recipeName}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + tokenService.getToken()
+        }
+      }).then(response => {
+        console.log(response.data)
+        setRecipeName(response.data.name)
+        setRecipeItems(response.data.items)
+      })
+    }
+    getRecipe()
+  },[])
 
-//   useEffect(() => {
-//     const getRecipes = async () => {
-//       await axios.get(`/api/recipes/${recipeName}`, {
-//         headers: {
-//           'Content-Type': 'application/json',
-//           'Authorization': 'Bearer ' + tokenService.getToken()
-//         }
-//       }).then(response => setRecipe(response.data))
-//     }
-//     getRecipes()
-//   },[])
+  const addRecipeItem = (newItem, newAmount) => {
+    
+    // update state
+    const oldRecipeItems = [...recipeItems]
+    const newRecipeItems = [...recipeItems, {item: {name:newItem}, amount: newAmount}]
+    
+    setRecipeItems(newRecipeItems)
 
-//   const addRecipeItem = (item, amount) => {
-//     // update state
-//     const oldRecipe = [...recipe]
-//     const newRecipe = [...recipe, {item, amount}]
-//     setRecipe(newRecipe)
+    // post to db
+    axios.post(`/api/recipes/${recipeNameFromUrl.recipeName}`, {
+      token: tokenService.getToken(),
+      newItem,
+      newAmount
+    })
+    .then(response => response.data)
+    .catch(error => {
+      console.log(error)
+      setRecipeItems(oldRecipeItems)
+    })
+  }
 
-//     // post to db
-//     axios.post('/api/recipes/:recipeName', {
-//       token: tokenService.getToken(),
-//       item,
-//       amount
-//     })
-//     .then(response => response.data)
-//     .catch(error => {
-//       console.log(error)
-//       setRecipe(oldRecipe)
-//     })
-//   }
-
-//   const deleteRecipeItem = async (index) => {
-//     const oldRecipe = [...recipe]
-//     const newRecipe = [...recipe]
-//     newRecipe.splice(index, 1)
-//     setRecipe(newRecipe)
-//     axios.delete('/api/recipes/:recipeName', {
-//       data: {
-//         token: tokenService.getToken(),
-//         index
-//       }
-//     })
-//     .then(response => response.data)
-//     .catch(error => {
-//       console.log(error)
-//       setRecipe(oldRecipe)
-//     })
-//   }
+  const deleteRecipeItem = async (index) => {
+    const oldRecipeItems = [...recipeItems]
+    const newRecipeItems = [...recipeItems]
+    newRecipeItems.splice(index, 1)
+    setRecipeItems(newRecipeItems)
+    axios.delete(`/api/recipes/${recipeNameFromUrl.recipeName}`, {
+      data: {
+        token: tokenService.getToken(),
+        index
+      }
+    })
+    .then(response => response.data)
+    .catch(error => {
+      console.log(error)
+      setRecipeItems(oldRecipeItems)
+    })
+  }
   
 
-//   return (
-//     <>
-//       <RecipeTable recipe={recipe} deleteRecipeItem={deleteRecipeItem} />
-//     </>
-//   )
-// }
+  return (
+    <div className='recipe-container'>
+      {recipeName ?
+        <>
+          <RecipeTable recipeName={recipeName} recipeItems={recipeItems} deleteRecipeItem={deleteRecipeItem} />
+        </>
+      :
+        <p>This recipe has no items. Add some!</p>
+      }
+      <RecipeAdd addRecipeItem={addRecipeItem} />
+    </div> 
+  )
+}

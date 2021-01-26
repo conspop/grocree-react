@@ -16,7 +16,10 @@ const stapleSchema = new Schema({
 const recipeSchema = new Schema({
   name: String,
   items: [{
-    item: String,
+    item: {
+      type: Schema.Types.ObjectId,
+      ref: 'Item'
+    },
     amount: String
   }]
 })
