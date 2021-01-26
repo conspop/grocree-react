@@ -4,7 +4,8 @@ module.exports = {
   index,
   show,
   create,
-  deleteRecipe
+  deleteRecipe,
+  updateRecipe
 }
 
 async function index(req, res) {
@@ -19,9 +20,9 @@ async function show(req, res) {
 }
 
 async function create(req, res) {
-  const {item, minimum} = req.body
+  const {newRecipeName} = req.body
   const user = await User.findById(req.user._id)
-  user.recipes.push({item, minimum})
+  user.recipes.push({name: newRecipeName})
   await user.save()
   res.json('ok')
 }
@@ -32,5 +33,13 @@ async function deleteRecipe(req, res) {
   user.recipes.splice(index, 1)
   await user.save()
   res.json('ok')
+}
+
+async function updateRecipe(req, res) {
+  const {index, newName} = req.body
+  const user = await User.findById(req.user._id)
+  user.recipes[index].name = newName
+  await user.save()
+  res.end()
 }
 

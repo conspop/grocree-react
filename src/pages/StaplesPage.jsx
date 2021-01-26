@@ -24,11 +24,14 @@ export default function StaplesPage() {
   },[])
 
   const addStaple = (item, minimum) => {
+
     // check if already in staples
-    const isInStaples = staples.filter(staplesItem => staplesItem.item === item).length > 0
-    if (isInStaples) {
-      setMessage(`${item} is already in staples.`)
-      return
+    if (staples) {
+      const isInStaples = staples.filter(staplesItem => staplesItem.item === item).length > 0
+      if (isInStaples) {
+        setMessage(`${item} is already in staples.`)
+        return
+      }
     }
 
     // update state

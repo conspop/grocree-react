@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-export default function StaplesAdd({addStaple}) {
+export default function RecipesAdd({addRecipe}) {
   const [showAddForm, setShowAddForm] = useState(false)
 
   useEffect(() => {
     const hideAddForm = (event) => {
       if (showAddForm) {
-        const addFormEl = document.querySelector('.staples-add-form')
+        const addFormEl = document.querySelector('.recipes-add-form')
         if (addFormEl) {
           const clickedInsideAddFrom = addFormEl.contains(event.target)
           if (!clickedInsideAddFrom) {
@@ -24,7 +24,7 @@ export default function StaplesAdd({addStaple}) {
   }
 
   const handleClickOutsideAddForm = event => {
-    const addFormEl = document.querySelector('.staples-add-form')
+    const addFormEl = document.querySelector('.recipes-add-form')
     const clickInsideAddForm = addFormEl.contains(event.target)
     if (!clickInsideAddForm) {
       setShowAddForm(false)
@@ -33,7 +33,7 @@ export default function StaplesAdd({addStaple}) {
   
   return (
     showAddForm ?
-    <AddForm addStaple={addStaple} handleClickOutsideAddForm={handleClickOutsideAddForm}/> :
+    <AddForm addRecipe={addRecipe} handleClickOutsideAddForm={handleClickOutsideAddForm}/> :
     <AddButton handleClickAddButton={handleClickAddButton} />
   )
 }
@@ -41,50 +41,38 @@ export default function StaplesAdd({addStaple}) {
 function AddButton({handleClickAddButton}) {
   return (
     <div>
-      <button className='staples-add-button' onClick={handleClickAddButton}><i className="fas fa-plus-circle"></i></button>
+      <button className='recipes-add-button' onClick={handleClickAddButton}><i className="fas fa-plus-circle"></i></button>
     </div>
   )
 }
 
-function AddForm({addStaple}) {
-  const [item, setItem] = useState('')
-  const [minimum, setMinimum] =useState('')
+function AddForm({addRecipe}) {
+  const [recipe, setRecipe] = useState('')
 
-  const handleEnterKey = () => {
-    addStaple(item, minimum)
-  }
-
-  const handleItemChange = event => setItem(event.target.value)
-  const handleMinimumChange = event => setMinimum(event.target.value)
+  const handleRecipeChange = event => setRecipe(event.target.value)
 
   const handleSubmit = () => {
-    if (item) {
-      addStaple(item, minimum)
-      setItem('')
-      setMinimum('')
-      document.querySelector('#item-input').focus()
+    if (recipe) {
+      addRecipe(recipe)
+      setRecipe('')
+      document.querySelector('#recipe-input').focus()
     }
   }
 
   return (
-    <div className='staples-add-form'>
+    <div className='recipes-add-form'>
       <input
-        id='item-input'
-        placeholder="Item"
-        onChange={handleItemChange}
-        value={item}
+        id='recipe-input'
+        placeholder="Recipe"
+        onChange={handleRecipeChange}
+        value={recipe}
         autoFocus
         required
-      />
-      <input 
-        placeholder="Minimum (optional)"
-        onChange={handleMinimumChange}
-        value={minimum}
       />
       <button
         onClick={handleSubmit}
         className='add-button'
-        disabled={(item === '')}
+        disabled={(recipe === '')}
       >
         <i className="fas fa-check-circle"></i>
       </button>
