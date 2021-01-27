@@ -20,7 +20,6 @@ async function addItem(userId, itemName) {
 }
 
 async function changeName(itemId, newName) {
-  console.log(itemId)
   const existingItem = await Item.findById(itemId)
   existingItem.name = newName
   await existingItem.save()

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-export default function RecipeTable({recipeName, recipeItems, deleteRecipeItem, updateRecipeItemName, updateRecipeItemAmount}) {
+export default function RecipeTable({recipeItems, deleteRecipeItem, updateRecipeItemName, updateRecipeItemAmount}) {
  
   return (
     <>
@@ -42,8 +42,6 @@ function RecipeItem({index, item, amount, deleteRecipeItem, updateRecipeItemName
   }
 
   const handleChangeName = (event) => {
-    console.log(event.target.value)
-    console.log(item.name)
     if (event.target.value === item.name) {
       setNameInput(event.target.value)
       setShowChangeNameMessage(false)

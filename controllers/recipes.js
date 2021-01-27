@@ -8,7 +8,8 @@ module.exports = {
   deleteRecipe,
   updateRecipe,
   addRecipeItem,
-  deleteRecipeItem
+  deleteRecipeItem,
+  updateRecipeItem
 }
 
 async function index(req, res) {
@@ -47,20 +48,6 @@ async function updateRecipe(req, res) {
   res.end()
 }
 
-async function updateRecipe(req, res) {
-  const {index, newName, newMinimum} = req.body
-  const user = await User.findById(req.user._id)
-  // if new name, change name in item model
-  if (newName) {
-    itemsHelper.changeName(user.staples[index].item, newName)
-  }
-  if (newMinimum) {
-    user.staples[index].minimum = newMinimum
-    await user.save()
-  }
-  res.end()
-}
-
 async function addRecipeItem(req, res) {
   const {newItem, newAmount} = req.body
   const user = await User.findById(req.user._id)
@@ -87,6 +74,22 @@ async function deleteRecipeItem(req, res) {
   recipe.items.splice(index, 1)
 
   await user.save()
+  res.end()
+}
+
+async function updateRecipeItem(req, res) {
+  const {index, newName, newAmount} = req.body
+  const user = await User.findById(req.user._id)
+  const recipe = user.recipes.find(recipe => recipe.name.toLowerCase() === req.params.recipeName.replace('-', ' '))
+  
+  // if new name, change name in item model
+  if (newName) {
+    itemsHelper.changeName(recipe.items[index].item, newName)
+  }
+  if (newAmount) {
+    user.recipes.items[index].amount = newAmount
+    await user.save()
+  }
   res.end()
 }
 

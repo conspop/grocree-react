@@ -68,6 +68,24 @@ export default function RecipePage() {
       setRecipeItems(oldRecipeItems)
     })
   }
+
+  const updateRecipeItemName = (index, newName) => {
+    const oldRecipeItems = [...recipeItems]
+    const newrecipeItems = [...recipeItems]
+    newrecipeItems[index].item = {name: newName}
+    setRecipeItems(newrecipeItems)
+
+    axios.put(`/api/recipes/${recipeNameFromUrl.recipeName}`, {
+      token: tokenService.getToken(),
+      index,
+      newName
+    })
+    .then(() => {console.log('Changed name!')})
+    .catch(error => {
+      console.log(error.message)
+      setRecipeItems(oldRecipeItems)
+    })
+  }
   
 
   return (
@@ -75,7 +93,12 @@ export default function RecipePage() {
       <h2>{recipeName}</h2>
       {recipeItems.length > 0 ?
         <>
-          <RecipeTable recipeName={recipeName} recipeItems={recipeItems} deleteRecipeItem={deleteRecipeItem} />
+          <RecipeTable 
+            recipeName={recipeName} 
+            recipeItems={recipeItems} 
+            deleteRecipeItem={deleteRecipeItem}
+            updateRecipeItemName={updateRecipeItemName}
+          />
         </>
       :
         <p>This recipe has no items. Add some!</p>
