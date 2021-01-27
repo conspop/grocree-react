@@ -102,7 +102,7 @@ export default function StaplesPage() {
       index,
       newMinimum
     })
-    .then(() => {console.log('Changed name!')})
+    .then(() => {console.log('Changed minimum!')})
     .catch(error => {
       console.log(error.message)
       setStaples(oldStaples)

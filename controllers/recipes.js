@@ -87,7 +87,7 @@ async function updateRecipeItem(req, res) {
     itemsHelper.changeName(recipe.items[index].item, newName)
   }
   if (newAmount) {
-    user.recipes.items[index].amount = newAmount
+    recipe.items[index].amount = newAmount
     await user.save()
   }
   res.end()

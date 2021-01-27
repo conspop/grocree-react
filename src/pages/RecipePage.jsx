@@ -71,9 +71,9 @@ export default function RecipePage() {
 
   const updateRecipeItemName = (index, newName) => {
     const oldRecipeItems = [...recipeItems]
-    const newrecipeItems = [...recipeItems]
-    newrecipeItems[index].item = {name: newName}
-    setRecipeItems(newrecipeItems)
+    const newRecipeItems = [...recipeItems]
+    newRecipeItems[index].item = {name: newName}
+    setRecipeItems(newRecipeItems)
 
     axios.put(`/api/recipes/${recipeNameFromUrl.recipeName}`, {
       token: tokenService.getToken(),
@@ -81,6 +81,24 @@ export default function RecipePage() {
       newName
     })
     .then(() => {console.log('Changed name!')})
+    .catch(error => {
+      console.log(error.message)
+      setRecipeItems(oldRecipeItems)
+    })
+  }
+
+  const updateRecipeItemAmount = (index, newAmount) => {
+    const oldRecipeItems = [...recipeItems]
+    const newRecipeItems = [...recipeItems]
+    newRecipeItems[index].amount = newAmount
+    setRecipeItems(newRecipeItems)
+
+    axios.put(`/api/recipes/${recipeNameFromUrl.recipeName}`, {
+      token: tokenService.getToken(),
+      index,
+      newAmount
+    })
+    .then(() => {console.log('Changed amount!')})
     .catch(error => {
       console.log(error.message)
       setRecipeItems(oldRecipeItems)
@@ -98,6 +116,7 @@ export default function RecipePage() {
             recipeItems={recipeItems} 
             deleteRecipeItem={deleteRecipeItem}
             updateRecipeItemName={updateRecipeItemName}
+            updateRecipeItemAmount={updateRecipeItemAmount}
           />
         </>
       :
