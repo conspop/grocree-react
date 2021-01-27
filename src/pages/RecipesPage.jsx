@@ -10,7 +10,7 @@ import './RecipesPage.css'
 
 export default function RecipesPage() {
 
-  const [recipes, setRecipes] = useState([{name:'', items:[{item:'', amount:''}]}])
+  const [recipes, setRecipes] = useState('')
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -99,14 +99,15 @@ export default function RecipesPage() {
   return (
     <>
       <div className='recipes-container'>
-      <RecipesTable 
-        recipes={recipes} 
-        deleteRecipe={deleteRecipe} 
-        updateRecipeName={updateRecipeName} 
-      />
-      {message ? <Message message={message} closeMessage={closeMessage} /> : false}
-      <RecipesAdd addRecipe={addRecipe} />
-    </div>
+        <h2>Recipes</h2>
+        <RecipesTable 
+          recipes={recipes} 
+          deleteRecipe={deleteRecipe} 
+          updateRecipeName={updateRecipeName} 
+        />
+        {message ? <Message message={message} closeMessage={closeMessage} /> : false}
+        <RecipesAdd addRecipe={addRecipe} />
+      </div>
     </>
   )
 }

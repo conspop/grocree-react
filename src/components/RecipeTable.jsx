@@ -4,7 +4,6 @@ export default function RecipeTable({recipeName, recipeItems, deleteRecipeItem, 
  
   return (
     <>
-      <h2>{recipeName}</h2>
       {recipeItems ?
       <div className='recipe-table'>
         <div className='recipe-table-title'>
@@ -43,9 +42,12 @@ function RecipeItem({index, item, amount, deleteRecipeItem, updateRecipeItemName
   }
 
   const handleChangeName = (event) => {
-    if (event.target.value === item.name)
+    console.log(event.target.value)
+    console.log(item.name)
+    if (event.target.value === item.name) {
+      setNameInput(event.target.value)
       setShowChangeNameMessage(false)
-    else {
+    } else {
       setNameInput(event.target.value)
       setShowChangeNameMessage(true)
     }

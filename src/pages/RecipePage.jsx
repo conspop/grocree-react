@@ -72,7 +72,8 @@ export default function RecipePage() {
 
   return (
     <div className='recipe-container'>
-      {recipeName ?
+      <h2>{recipeName}</h2>
+      {recipeItems.length > 0 ?
         <>
           <RecipeTable recipeName={recipeName} recipeItems={recipeItems} deleteRecipeItem={deleteRecipeItem} />
         </>

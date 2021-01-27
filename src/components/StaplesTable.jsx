@@ -42,9 +42,12 @@ function Staple({index, item, minimum, deleteStaple, updateStapleName, updateSta
   }
 
   const handleChangeName = (event) => {
-    if (event.target.value === item)
+    console.log(event.target.value)
+    console.log(item.name)
+    if (event.target.value === item.name) {
+      setNameInput(event.target.value)
       setShowChangeNameMessage(false)
-    else {
+    } else {
       setNameInput(event.target.value)
       setShowChangeNameMessage(true)
     }

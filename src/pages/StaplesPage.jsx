@@ -115,6 +115,7 @@ export default function StaplesPage() {
 
   return (
     <div className='staples-container'>
+      <h2>Staples</h2>
       <StaplesTable 
         staples={staples} 
         deleteStaple={deleteStaple} 

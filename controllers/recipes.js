@@ -47,6 +47,20 @@ async function updateRecipe(req, res) {
   res.end()
 }
 
+async function updateRecipe(req, res) {
+  const {index, newName, newMinimum} = req.body
+  const user = await User.findById(req.user._id)
+  // if new name, change name in item model
+  if (newName) {
+    itemsHelper.changeName(user.staples[index].item, newName)
+  }
+  if (newMinimum) {
+    user.staples[index].minimum = newMinimum
+    await user.save()
+  }
+  res.end()
+}
+
 async function addRecipeItem(req, res) {
   const {newItem, newAmount} = req.body
   const user = await User.findById(req.user._id)
