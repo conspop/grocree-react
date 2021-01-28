@@ -57,18 +57,20 @@
 
 .recipes-add-button {
   position: fixed;
-  bottom: 2.5%;
-  right: 2.5%;
+  bottom: 5%;
+  right: 5%;
 }
 
 .recipes-add-form {
   height: 5%;
-  width: 90%;
+  width: 85%;
   position: fixed;
   bottom: 2.5%;
   display: grid;
   grid-template-columns: 1fr auto;
   row-gap: .5rem;
+  border: 1px solid black;
+  padding: .5rem;
 }
 
 .recipes-add-form input {
