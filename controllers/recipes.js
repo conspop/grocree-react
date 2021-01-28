@@ -84,7 +84,8 @@ async function updateRecipeItem(req, res) {
   
   // if new name, change name in item model
   if (newName) {
-    itemsHelper.changeName(recipe.items[index].item, newName)
+    recipe.items[index].item = await itemsHelper.changeName(recipe.items[index].item, newName, req.user._id)
+    await user.save()
   }
   if (newAmount) {
     recipe.items[index].amount = newAmount

@@ -40,9 +40,10 @@ async function deleteStaple(req, res) {
 async function updateStaple(req, res) {
   const {index, newName, newMinimum} = req.body
   const user = await User.findById(req.user._id)
-  // if new name, change name in item model
+
   if (newName) {
-    itemsHelper.changeName(user.staples[index].item, newName)
+    user.staples[index].item = await itemsHelper.changeName(user.staples[index].item, newName, req.user._id)
+    await user.save()
   }
   if (newMinimum) {
     user.staples[index].minimum = newMinimum

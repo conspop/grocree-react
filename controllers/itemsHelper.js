@@ -1,12 +1,16 @@
+const { findByIdAndDelete, findById } = require('../models/item');
 const Item = require('../models/item');
 
 module.exports = {
   addItem,
-  changeName
+  changeName,
 }
 
 async function addItem(userId, itemName) {
-  const existingItem = Item.find({user: userId, item: itemName})
+  console.log(userId)
+  console.log(itemName)
+  const existingItem = await Item.find({user: userId, name: itemName})
+  console.log(existingItem[0])
   if (existingItem[0]) {
     return existingItem[0]
   } else {
@@ -19,9 +23,21 @@ async function addItem(userId, itemName) {
   }
 }
 
-async function changeName(itemId, newName) {
-  const existingItem = await Item.findById(itemId)
-  existingItem.name = newName
-  await existingItem.save()
+async function changeName(itemId, newName, userId) {
+  const oldItem = await Item.findById(itemId)
+  // check if new name already exists
+  const isExistingName = await Item.find({name: newName})
+  if (isExistingName.length > 0) {
+    // if existing name, pass id of existing item
+    return isExistingName[0]._id
+  } else {
+    // if new name doesn't exist, create and pass new item id
+    const newItem = new Item({name: newName})
+    newItem.user = userId
+    newItem.home = oldItem.home
+    newItem.store = oldItem.store
+    await newItem.save()
+    return newItem._id
+  }
 }
 

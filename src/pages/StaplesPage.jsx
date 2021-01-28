@@ -19,7 +19,10 @@ export default function StaplesPage() {
         'Authorization': 'Bearer ' + tokenService.getToken()
       }
     })
-    .then(response => {setStaples(response.data)})
+    .then(response => {
+      console.log(response.data)
+      setStaples(response.data)
+    })
     .catch(error => {console.log(error.message)})
   },[])
 
