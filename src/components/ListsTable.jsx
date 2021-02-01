@@ -2,61 +2,60 @@ import React, { useState } from 'react'
 import { useRouteMatch, Link} from 'react-router-dom'
 
 
-export default function RecipesTable({recipes, deleteRecipe, updateRecipeName}) {
+export default function ListsTable({lists, deleteList, updateListName}) {
 
   return (
     <>
-      {recipes.length > 0 ?
-      <div className='staples-table'>
-        <div className='staples-table-title'>
-          <div>Recipe</div>
+      {lists.length > 0 ?
+      <div className='lists-table'>
+        <div className='lists-table-title'>
+          <div>List</div>
           <div></div>
         </div>
         
-        {recipes.map(({name}, index) => {
+        {lists.map(({name}, index) => {
           return (
-            <Recipe 
+            <List 
               index={index}
               name={name} 
-              deleteRecipe={deleteRecipe}
-              updateRecipeName={updateRecipeName}
+              deleteList={deleteList}
+              updateListName={updateListName}
               key={name}
             />
           )
         })}        
       </div>
       :
-      <p>You have no recipes.</p>}
+      <p>You have no lists.</p>}
     </>
   )
 }
 
-function Recipe({index, name, deleteRecipe, updateRecipeName}) {
-  const [showChangeNameMessage, setShowChangeNameMessage] = useState(false)
+function List({index, name, deleteList, updateListName}) {
   const [nameInput, setNameInput] = useState(name)
   
   const handleDelete = () => {
-    deleteRecipe(index)
+    deleteList(index)
   }
 
   const handleChangeName = (event) => {
     setNameInput(event.target.value)
-    updateRecipeName(index, event.target.value)
+    updateListName(index, event.target.value)
   }
   
   return (
-    <div className='recipes-table-item'>
-      <RecipeField 
+    <div className='lists-table-item'>
+      <ListField 
         field={nameInput} 
         handleChange={handleChangeName} 
       />
-      <RecipeLink recipe={name} />
+      <ListLink list={name} />
       <button className='delete-button' onClick={handleDelete}><i className="fas fa-minus-circle"></i></button>
     </div>
   )
 }
 
-function RecipeField({field, handleChange}) {
+function ListField({field, handleChange}) {
   return (
     <input 
       value={field}
@@ -66,14 +65,14 @@ function RecipeField({field, handleChange}) {
 }
 
 
-function RecipeLink({recipe}) {
-  const recipePath = recipe.toLowerCase().replace(' ','-')
+function ListLink({list}) {
+  const listPath = list.toLowerCase().replace(' ','-')
   const {path, url} = useRouteMatch();
 
   return (
     <Link
-      to={`${url}/${recipePath}`}
-      key={recipePath}
+      to={`${url}/${listPath}`}
+      key={listPath}
     ><i class="fas fa-chevron-circle-right"></i>
     </Link>
   )

@@ -22,6 +22,7 @@ app.use('/api/users', require('./routes/api/users'));
 app.use(require('./config/auth'));
 app.use('/api/staples', require('./routes/api/staples'))
 app.use('/api/recipes', require('./routes/api/recipes'))
+app.use('/api/lists', require('./routes/api/lists'))
 
 app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))

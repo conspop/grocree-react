@@ -1,14 +1,14 @@
-.recipes-container {
+.lists-container {
   padding: 5%;
 }
 
-.recipes-table {
+.lists-table {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.recipes-table-title {
+.lists-table-title {
   display: grid;
   grid-template-columns: 50% 30% 1fr;
   border-bottom: 2px solid black;
@@ -16,14 +16,14 @@
   font-weight: bold;
 }
 
-.recipes-table-item {
+.lists-table-item {
   display: grid;
   grid-template-columns: 60% 20% 20%;
   padding: .5rem 0;
   border-bottom: 1px solid grey;
 }
 
-.recipes-table-item a {
+.lists-table-item a {
   text-align: right;
 }
 
@@ -50,18 +50,18 @@
   padding: .5rem 0 .75rem 0;
 }
 
-.recipes-table input {
+.lists-table input {
   border: none;
   padding: 0;
 }
 
-.recipes-add-button {
+.lists-add-button {
   position: fixed;
   bottom: 5%;
   right: 5%;
 }
 
-.recipes-add-form {
+.lists-add-form {
   height: 5%;
   width: 85%;
   position: fixed;
@@ -73,14 +73,14 @@
   padding: .5rem;
 }
 
-.recipes-add-form input {
+.lists-add-form input {
   font-size: 16px;
   padding: 0.25rem;
   border: 1px solid grey;
   border-radius:.25rem;
 }
 
-.recipes-add-button {
+.lists-add-button {
   grid-area: 1/2/3/3;
   background-color: transparent;
   border: none;
@@ -89,7 +89,7 @@
   font-size: 1.5rem;
 }
 
-.recipes-add-form button {
+.lists-add-form button {
   background-color: transparent;
   border: none;
   color: green;
@@ -99,7 +99,7 @@
   justify-self: flex-end;
 }
 
-.recipes-message {
+.lists-message {
   position: fixed;
   bottom: 15%;
   width: 90%;

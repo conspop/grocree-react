@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-export default function RecipesAdd({addRecipe}) {
+export default function ListsAdd({addList}) {
   const [showAddForm, setShowAddForm] = useState(false)
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function RecipesAdd({addRecipe}) {
   
   return (
     showAddForm ?
-    <AddForm addRecipe={addRecipe} handleClickOutsideAddForm={handleClickOutsideAddForm}/> :
+    <AddForm addList={addList} handleClickOutsideAddForm={handleClickOutsideAddForm}/> :
     <AddButton handleClickAddButton={handleClickAddButton} />
   )
 }
@@ -41,38 +41,38 @@ export default function RecipesAdd({addRecipe}) {
 function AddButton({handleClickAddButton}) {
   return (
     <div>
-      <button className='recipes-add-button' onClick={handleClickAddButton}><i className="fas fa-plus-circle"></i></button>
+      <button className='lists-add-button' onClick={handleClickAddButton}><i className="fas fa-plus-circle"></i></button>
     </div>
   )
 }
 
-function AddForm({addRecipe}) {
-  const [recipe, setRecipe] = useState('')
+function AddForm({addList}) {
+  const [list, setList] = useState('')
 
-  const handleRecipeChange = event => setRecipe(event.target.value)
+  const handleListChange = event => setList(event.target.value)
 
   const handleSubmit = () => {
-    if (recipe) {
-      addRecipe(recipe)
-      setRecipe('')
+    if (list) {
+      addList(list)
+      setList('')
       document.querySelector('#recipe-input').focus()
     }
   }
 
   return (
-    <div className='recipes-add-form'>
+    <div className='lists-add-form'>
       <input
-        id='recipe-input'
-        placeholder="Recipe"
-        onChange={handleRecipeChange}
-        value={recipe}
+        id='list-input'
+        placeholder="List"
+        onChange={handleListChange}
+        value={list}
         autoFocus
         required
       />
       <button
         onClick={handleSubmit}
         className='add-button'
-        disabled={(recipe === '')}
+        disabled={(list === '')}
       >
         <i className="fas fa-check-circle"></i>
       </button>
