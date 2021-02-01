@@ -5,11 +5,11 @@ module.exports = {
   index,
   // show,
   create,
-  // deleteRecipe,
-  // updateRecipe,
-  // addRecipeItem,
-  // deleteRecipeItem,
-  // updateRecipeItem
+  deleteList,
+  updateList,
+  // addListItem,
+  // deleteListItem,
+  // updateListItem
 }
 
 async function index(req, res) {
@@ -26,27 +26,26 @@ async function index(req, res) {
 async function create(req, res) {
   const {newListName} = req.body
   const user = await User.findById(req.user._id)
-  user.lists.push({name: newRecipeName})
+  user.lists.push({name: newListName})
   await user.save()
   res.end()
 }
 
-// async function deleteRecipe(req, res) {
-//   console.log('got here')
-//   const {index} = req.body
-//   const user = await User.findById(req.user._id)
-//   user.recipes.splice(index, 1)
-//   await user.save()
-//   res.end()
-// }
+async function deleteList(req, res) {
+  const {index} = req.body
+  const user = await User.findById(req.user._id)
+  user.lists.splice(index, 1)
+  await user.save()
+  res.end()
+}
 
-// async function updateRecipe(req, res) {
-//   const {index, newName} = req.body
-//   const user = await User.findById(req.user._id)
-//   user.recipes[index].name = newName
-//   await user.save()
-//   res.end()
-// }
+async function updateList(req, res) {
+  const {index, newName} = req.body
+  const user = await User.findById(req.user._id)
+  user.lists[index].name = newName
+  await user.save()
+  res.end()
+}
 
 // async function addRecipeItem(req, res) {
 //   const {newItem, newAmount} = req.body
