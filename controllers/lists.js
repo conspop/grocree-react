@@ -4,7 +4,7 @@ const itemsHelper = require('./itemsHelper')
 module.exports = {
   index,
   // show,
-  // create,
+  create,
   // deleteRecipe,
   // updateRecipe,
   // addRecipeItem,
@@ -23,13 +23,13 @@ async function index(req, res) {
 //   res.json(recipe)
 // }
 
-// async function create(req, res) {
-//   const {newRecipeName} = req.body
-//   const user = await User.findById(req.user._id)
-//   user.recipes.push({name: newRecipeName})
-//   await user.save()
-//   res.end()
-// }
+async function create(req, res) {
+  const {newListName} = req.body
+  const user = await User.findById(req.user._id)
+  user.lists.push({name: newRecipeName})
+  await user.save()
+  res.end()
+}
 
 // async function deleteRecipe(req, res) {
 //   console.log('got here')

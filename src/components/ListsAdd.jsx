@@ -55,7 +55,7 @@ function AddForm({addList}) {
     if (list) {
       addList(list)
       setList('')
-      document.querySelector('#recipe-input').focus()
+      document.querySelector('#list-input').focus()
     }
   }
 
