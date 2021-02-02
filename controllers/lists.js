@@ -3,7 +3,7 @@ const itemsHelper = require('./itemsHelper')
 
 module.exports = {
   index,
-  // show,
+  show,
   create,
   deleteList,
   updateList,
@@ -17,11 +17,12 @@ async function index(req, res) {
   res.json(lists)
 }
 
-// async function show(req, res) {
-//   const {recipes} = await User.findById(req.user._id).populate('recipes.items.item')
-//   const recipe = recipes.find(recipe => recipe.name.toLowerCase() === req.params.recipeName.replace('-', ' '))
-//   res.json(recipe)
-// }
+async function show(req, res) {
+  console.log('got here')
+  const {lists} = await User.findById(req.user._id).populate('lists.items.item')
+  const list = lists.find(list => list.name.toLowerCase() === req.params.listName.replace('-', ' '))
+  res.json(list)
+}
 
 async function create(req, res) {
   const {newListName} = req.body

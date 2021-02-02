@@ -10,6 +10,7 @@ import StaplesPage from './pages/StaplesPage'
 import RecipesPage from './pages/RecipesPage'
 import ListsPage from './pages/ListsPage'
 import RecipePage from './pages/RecipePage'
+import ListPage from './pages/ListPage'
 
 import './App.css'
 
@@ -57,6 +58,9 @@ export default function App() {
           </Route>
           <Route exact path='/lists'>
             <ListsPage />
+          </Route>
+          <Route path='/lists/:listName'>
+            <ListPage />
           </Route>
         </>
       </Switch>
